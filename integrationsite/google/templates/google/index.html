@@ -24,6 +24,10 @@
       background-position: center;
       background-repeat: no-repeat;
     }
+
+    .card img {
+      max-width: 300px;
+    }
   </style>
 </head>
 
@@ -37,12 +41,16 @@
           <a class="btn btn-info" role="button"
             href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}">Login with Google</a>
           {% else %}
-          <p>Logged as {{ user.username }}</p>
-          <p>First name: {{ user.first_name }}</p>
-          <p>Last name: {{ user.last_name }}</p>
-
-          <div class="col-sm-12 mt-2 text-center">
-            <a class="btn btn-danger" href="{% url 'logout' %}">Logout</a>
+          <div class="card col-sm-8 offset-sm-2">
+            <img class="rounded-circle mx-auto" src="{{user.photo_url}}" alt="display pic">
+            <div class="card-body">
+              <h5 class="card-title">{{ user.first_name }} {{user.last_name}}</h5>
+              <p class="card-text"><b>Email:</b> {{ user.email }}</p>
+              <p class="card-text"><b>User Name:</b> {{ user.username }}</p>
+              <div class="col-sm-12 mt-2 text-center">
+                <a class="btn btn-danger" href="{% url 'logout' %}">Logout</a>
+              </div>
+            </div>
           </div>
           {% endif %}
         </div>
